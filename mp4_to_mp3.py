@@ -81,12 +81,15 @@ def convert_files_in_folder() -> None:
     
     folder = "Converted audio\\"
     
+    fileNumber = 1
     for video in videos:
         try:
+            print(f"Processing file {fileNumber}/{len(videos)}")
             clip = mp.VideoFileClip(video)
             create_folder(folder)
             file_name = video[:len(video) - len(MP4)] + MP3     # Replace only file format.
             clip.audio.write_audiofile(folder + file_name)
+            fileNumber += 1
         except:
             print(f"Something went wrong with file '{video}'")
         finally:
@@ -104,6 +107,7 @@ def get_mode() -> str:
         mode = input()
         if str_compare(mode, stop_string):
             break
+    print()
     return mode
 
 
